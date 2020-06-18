@@ -1,4 +1,5 @@
 ﻿using LanguageExt;
+using static LanguageExt.Prelude;
 using System;
 
 namespace seq_take_bug
@@ -12,15 +13,22 @@ namespace seq_take_bug
 
         static void Main(string[] args)
         {
-            Seq<MyType> emptySeq = from item in LongSeq()
+            Console.WriteLine("\nSimple Construction:");
+            Seq<MyType> empty = Seq<MyType>();
+            Console.WriteLine("emptyr:1");
+            Console.WriteLine(empty);
+            Console.WriteLine(empty.Take(5));
+
+            Seq<MyType> emptyAfterLinq = from item in LongSeq()
                                    where item.Value > 5
                                    select item;
-            Seq<MyType> take5 = emptySeq.Take(5);
+            Seq<MyType> take5 = emptyAfterLinq.Take(5);
 
-            Console.WriteLine("emptySeq");
-            Console.WriteLine(emptySeq);
+            Console.WriteLine("\nConstructing Empty With Linq/where:");
+            Console.WriteLine("emptyAfterLinq");
+            Console.WriteLine(emptyAfterLinq);
 
-            Console.WriteLine("take5");
+            Console.WriteLine("emptyAfterLinq.Take(5)");
             Console.WriteLine(take5);
         }
     }
